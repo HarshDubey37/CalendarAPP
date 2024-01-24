@@ -40,15 +40,15 @@ class MainActivity : AppCompatActivity() {
 
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
 
-            var day = dayOfMonth.toString()
+            var Day = dayOfMonth.toString()
             var mm = (month + 1).toString()
             if (dayOfMonth < 10) {
-                day = "0$dayOfMonth"
+                Day = "0$dayOfMonth"
             }
             if (month < 9) {
                 mm = "0$mm"
             }
-            date = ("$year-$mm-$day")
+            date = ("$year-$mm-$Day")
             binding.textView.text = date
         }
         googlecalendar()
