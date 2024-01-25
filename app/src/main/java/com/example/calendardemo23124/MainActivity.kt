@@ -39,30 +39,31 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-
-            var Day = dayOfMonth.toString()
-            var mm = (month + 1).toString()
-            if (dayOfMonth < 10) {
-                Day = "0$dayOfMonth"
-            }
-            if (month < 9) {
-                mm = "0$mm"
-            }
-            date = ("$year-$mm-$Day")
-            binding.textView.text = date
+                var Day = dayOfMonth.toString()
+                var mm = (month + 1).toString()
+                if (dayOfMonth < 10) {
+                    Day = "0$dayOfMonth"
+                }
+                if (month < 9) {
+                    mm = "0$mm"
+                }
+                date = ("$year-$mm-$Day")
+                binding.textView.text = date
         }
+
         googlecalendar()
         binding.button.setOnClickListener {
             text=binding.editTextText.text.toString()
             event=eventcreate()
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-                    val createdEvent = service.events().insert("primary", event).execute()
+                   service.events().insert("primary", event).execute()
                     withContext(Dispatchers.Main) {
                         // Update UI on success
                         Toast.makeText(this@MainActivity, "Event Created!!", Toast.LENGTH_SHORT).show()
                     }
-                } catch (e: Exception) {
+                }
+                catch (e: Exception) {
                     withContext(Dispatchers.Main) {
                         // Handle exceptions on UI thread
                         Toast.makeText(this@MainActivity, "Error creating event", Toast.LENGTH_SHORT).show()
@@ -71,8 +72,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-
-
     }
 
     private fun googlecalendar() {
@@ -125,10 +124,5 @@ class MainActivity : AppCompatActivity() {
 
             return event
     }
-
-
-    // Example: List the next 10 events from the primary calendar.
-
-
 
 }
