@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                     val createdEvent = service.events().insert("primary", event).execute()
                     withContext(Dispatchers.Main) {
                         // Update UI on success
-                        Toast.makeText(this@MainActivity, "Event HHHCreated: ${createdEvent.htmlLink}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, "Event Created!!", Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
@@ -95,39 +95,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleSignIn(task: Task<GoogleSignInAccount>) {
-
         try {
             val account=task.getResult(ApiException::class.java)
-
             val credential = GoogleAccountCredential.usingOAuth2(this, listOf(CalendarScopes.CALENDAR))
             credential.selectedAccount = account?.account
-
             service = Calendar.Builder(AndroidHttp.newCompatibleTransport(), GsonFactory(), credential)
                 .setApplicationName(getString(R.string.app_name))
                 .build()
-            Log.d("Tag","Service")
+                Log.d("Tag","Service")
         }
         catch (e:Exception){
             Log.w("SignInActivity", "signInResult:failed code=" + e.message)
-
         }
     }
 
     private fun eventcreate():Event {
-        val event = Event().setSummary(text)
-            .setLocation("Event Location")
-            .setDescription("Event Description")
+            val event = Event().setSummary(text)
+                .setLocation("Event Location")
+                .setDescription("Event Description")
 
-        val startDateTime = DateTime(date+"T01:00:00")
-        val start = EventDateTime().setDateTime(startDateTime)
-        event.setStart(start)
+            val startDateTime = DateTime(date+"T01:00:00")
+            val start = EventDateTime().setDateTime(startDateTime)
+            event.setStart(start)
 
-        val endDateTime = DateTime(date+"T10:00:00")
-        val end = EventDateTime().setDateTime(endDateTime)
-        event.setEnd(end)
-        Toast.makeText(this,"event ",Toast.LENGTH_SHORT).show()
+            val endDateTime = DateTime(date+"T10:00:00")
+            val end = EventDateTime().setDateTime(endDateTime)
+            event.setEnd(end)
+            Toast.makeText(this,"event ",Toast.LENGTH_SHORT).show()
 
-        return event
+            return event
     }
 
 
