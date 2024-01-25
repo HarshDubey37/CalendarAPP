@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                     val createdEvent = service.events().insert("primary", event).execute()
                     withContext(Dispatchers.Main) {
                         // Update UI on success
-                        Toast.makeText(this@MainActivity, "Event Created: ${createdEvent.htmlLink}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, "Event HHHCreated: ${createdEvent.htmlLink}", Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
@@ -90,7 +90,6 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode==100){
             val task=GoogleSignIn.getSignedInAccountFromIntent(data)
-            Toast.makeText(this,"58 ",Toast.LENGTH_SHORT).show()
             handleSignIn(task)
         }
     }
@@ -98,7 +97,6 @@ class MainActivity : AppCompatActivity() {
     private fun handleSignIn(task: Task<GoogleSignInAccount>) {
 
         try {
-            Toast.makeText(this,"65 ",Toast.LENGTH_SHORT).show()
             val account=task.getResult(ApiException::class.java)
 
             val credential = GoogleAccountCredential.usingOAuth2(this, listOf(CalendarScopes.CALENDAR))
@@ -116,18 +114,7 @@ class MainActivity : AppCompatActivity() {
 
       //      service.events().insert("primary", event).execute()
             Log.d("Tag","Service")
-            Toast.makeText(this,"577 ",Toast.LENGTH_SHORT).show()
-       //    insertEvent(service,event)
 
-
-            //  val now = DateTime(System.currentTimeMillis())
-//            service.events().list("primary")
-//                .setMaxResults(10)
-//                .setTimeMin(now)
-//                .setOrderBy("startTime")
-//                .setSingleEvents(true)
-//                .execute()
-//            Toast.makeText(this,"87 ",Toast.LENGTH_SHORT).show()
 
         }
         catch (e:Exception){
