@@ -105,36 +105,12 @@ class MainActivity : AppCompatActivity() {
             service = Calendar.Builder(AndroidHttp.newCompatibleTransport(), GsonFactory(), credential)
                 .setApplicationName(getString(R.string.app_name))
                 .build()
-            Toast.makeText(this,"79 ",Toast.LENGTH_SHORT).show()
-
             Log.d("Tag","Service")
-
-
-
-
-      //      service.events().insert("primary", event).execute()
-            Log.d("Tag","Service")
-
-
         }
         catch (e:Exception){
             Log.w("SignInActivity", "signInResult:failed code=" + e.message)
 
         }
-    }
-
-    private fun insertEvent(service: Calendar, event: Event){
-        try {
-            val events = service.events().insert("primary", event).execute()
-            Toast.makeText(this,"inserted ",Toast.LENGTH_SHORT).show()
-
-            System.out.printf("Event created: %s\n", events.htmlLink)
-        } catch (e: java.lang.Exception) {
-            Toast.makeText(this,e.message,Toast.LENGTH_SHORT).show()
-            Log.d("Tag",e.message!!)
-            e.printStackTrace()
-        }
-
     }
 
     private fun eventcreate():Event {
