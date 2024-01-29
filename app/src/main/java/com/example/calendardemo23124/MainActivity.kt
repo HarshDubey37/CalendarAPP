@@ -35,14 +35,14 @@ class MainActivity : AppCompatActivity() {
     private  var text: String="null"
     private lateinit var service: Calendar
     private lateinit var event: Event
-    private var flag=0
+    private var Flagg=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            flag=1
+            Flagg=1
             var Day = dayOfMonth.toString()
             var mm = (month + 1).toString()
             if (dayOfMonth < 10) {
@@ -128,7 +128,7 @@ class MainActivity : AppCompatActivity() {
                  mmm="0$mmm"
             }
             val yr=cl.get(java.util.Calendar.YEAR).toString()
-            if (flag==0) {
+            if (Flagg==0) {
                 date = ("$yr-$mmm-$day")
             }
 
