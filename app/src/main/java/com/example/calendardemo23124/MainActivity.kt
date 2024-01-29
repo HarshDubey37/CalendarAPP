@@ -87,6 +87,7 @@ class MainActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     // Handle exceptions on UI thread
                     Toast.makeText(this@MainActivity, "Error creating event", Toast.LENGTH_SHORT).show()
+
                 }
             }
         }
