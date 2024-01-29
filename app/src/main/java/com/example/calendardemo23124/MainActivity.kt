@@ -43,15 +43,15 @@ class MainActivity : AppCompatActivity() {
 
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             Flagg=1
-            var Day = dayOfMonth.toString()
+            var Dayy = dayOfMonth.toString()
             var mm = (month + 1).toString()
             if (dayOfMonth < 10) {
-                Day = "0$dayOfMonth"
+                Dayy = "0$dayOfMonth"
             }
             if (month < 9) {
                 mm = "0$mm"
             }
-            date = ("$year-$mm-$Day")
+            date = ("$year-$mm-$Dayy")
             binding.textView.text = date
         }
 
