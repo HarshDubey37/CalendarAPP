@@ -4,7 +4,9 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -36,11 +38,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var service: Calendar
     private lateinit var event: Event
     private var flag=0
+    private lateinit var pgr:ProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        pgr=binding.prgbar
+        pgr.visibility= View.VISIBLE
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             flag=1
             var Day = dayOfMonth.toString()
@@ -57,18 +61,20 @@ class MainActivity : AppCompatActivity() {
 
         googlecalendar()
         binding.button.setOnClickListener {
+            pgr.visibility= View.VISIBLE
             AlertDialog.Builder(this)
                 .setTitle("Create Event")
                 .setMessage("Are you sure You want to create Event?")
                 .setPositiveButton("Yes") { di: DialogInterface?, i: Int ->
                     savefunction()
                     Toast.makeText(this,"Thank You!!",Toast.LENGTH_SHORT).show()
+                    pgr.visibility= View.GONE
                 }
                 .setNegativeButton("No"){ DialogInterface,i->
                     Toast.makeText(this,"OK Fine",Toast.LENGTH_SHORT).show()
+                    pgr.visibility= View.GONE
                 }
                 .create().show()
-
         }
     }
 
@@ -89,6 +95,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, "Error creating event", Toast.LENGTH_SHORT).show()
 
                 }
+
             }
         }
 
@@ -109,6 +116,7 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode==100){
             val task=GoogleSignIn.getSignedInAccountFromIntent(data)
+            pgr.visibility= View.GONE
             handleSignIn(task)
         }
     }
