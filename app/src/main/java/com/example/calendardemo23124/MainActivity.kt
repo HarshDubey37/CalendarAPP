@@ -104,6 +104,7 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(signInIntent,100)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode==100){
